@@ -2,8 +2,6 @@
 //
 //     final usermodel = usermodelFromJson(jsonString);
 
-import 'dart:convert';
-
 //Usermodel usermodelFromJson(String str) => Usermodel.fromJson(json.decode(str));
 
 //String usermodelToJson(Usermodel data) => json.encode(data.toJson());

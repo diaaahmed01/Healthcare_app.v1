@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'WebService.dart';
 import 'package:http/http.dart' as http;
 
-import '../../Configuration/api_constants.dart';
+import '../../../../Configuration/api_constants.dart';
 import '../models/model.dart';
+import 'WebService.dart';
 
 class UserRepository {
   final WebService webservice;

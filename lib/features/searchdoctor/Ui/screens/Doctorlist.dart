@@ -1,14 +1,12 @@
 import '../../Data/models/model.dart';
 
-import '../../Data/data_providers/loadjson.dart';
+import '../../Logic/cubit/doctor_list_cubit.dart';
 import '../widgets/doctor_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../Data/models/doctor_model.dart';
-import '../../Logic/cubit/doctor_list_cubit.dart';
 import '../widgets/LoadingIndicator.dart';
 
 class DoctorList extends StatefulWidget {
