@@ -26,6 +26,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - lib/features/searchdoctor/images/doctor.jpg
+ # assets:
+   # - lib/features/searchdoctor/images/doctor.jpg
 

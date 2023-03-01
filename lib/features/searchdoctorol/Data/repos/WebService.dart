@@ -8,6 +8,22 @@ import '../../../../Configuration/api_constants.dart';
 class WebService {
   String endpoint = ApiConstants.baseUrl;
   String api = ApiConstants.api;
+  String ReviewApi = ApiConstants.ReviewApi;
+
+  Future<List> getReviewById(String doctorId) async {
+    Uri url1 = Uri.https(endpoint, ReviewApi);
+    Uri url = Uri.parse("$url1/$doctorId");
+    print(url);
+    Response response = await get(url);
+    if (response.statusCode == 200) {
+      final List result = jsonDecode(response.body);
+      print(result);
+      return result;
+    } else {
+      throw Exception(response.reasonPhrase);
+    }
+  }
+
   Map<String, String> get headers {
     return {
       'Content-type': 'application/json; charset=UTF-8',
