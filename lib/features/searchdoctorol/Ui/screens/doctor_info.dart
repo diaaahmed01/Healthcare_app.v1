@@ -48,9 +48,10 @@ class doctorInfo extends StatelessWidget {
                     ),
                     MaterialButton(
                       onPressed: () {
-                        ApiConstants.id = doctor.id;
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => reviewsList(),
+                          builder: (context) => reviewsList(
+                            doctor: doctor,
+                          ),
                         ));
                       },
                       child: Text("reviews"),

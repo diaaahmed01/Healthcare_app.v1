@@ -12,14 +12,16 @@ import '../widgets/LoadingIndicator.dart';
 import '../widgets/review.dart';
 
 class reviewsList extends StatelessWidget {
-  late final List<Review> allReviews;
+  late List<Review> allReviews;
+  Usermodel doctor;
   reviewsList({
-    required this.allReviews,
+    required this.doctor,
   });
 
   Widget buildBlockwidget() {
     return BlocBuilder<DoctorListCubit, DoctorListState>(
       builder: (context, state) {
+        BlocProvider.of<DoctorListCubit>(context).getReviewById(doctor.id);
         if (state is DoctorReviewLoaded) {
           allReviews = (state).reviews;
           return buildLoadedListWidgets();

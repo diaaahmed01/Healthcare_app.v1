@@ -47,7 +47,9 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider.value(
                   value: doctorListCubit,
-                  child: reviewsList(),
+                  child: reviewsList(
+                    doctor: doctor,
+                  ),
                 ));
 
       default:
