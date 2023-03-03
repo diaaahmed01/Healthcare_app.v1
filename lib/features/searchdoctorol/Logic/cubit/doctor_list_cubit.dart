@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:drlist_bloc_app/features/searchdoctorol/Data/models/review.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../Data/models/model.dart';
 import '../../Data/repos/repostory.dart';
@@ -32,10 +33,5 @@ class DoctorListCubit extends Cubit<DoctorListState> {
     });
 
     return allReviews;
-  }
-
-  testTest() {
-    String test = 'diaa';
-    emit(Testt(test));
   }
 }

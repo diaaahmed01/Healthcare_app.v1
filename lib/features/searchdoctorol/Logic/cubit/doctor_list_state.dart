@@ -25,7 +25,8 @@ class DoctorReviewLoaded extends DoctorListState {
   DoctorReviewLoaded(this.reviews);
 }
 
-class Testt extends DoctorListState {
-  final String test;
-  Testt(this.test);
+class UserErrorState extends DoctorListState {
+  final String e;
+
+  UserErrorState(this.e);
 }

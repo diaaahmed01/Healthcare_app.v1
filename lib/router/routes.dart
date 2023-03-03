@@ -56,8 +56,4 @@ class AppRouter {
         return null;
     }
   }
-
-  void dispose() {
-    doctorListCubit.close();
-  }
 }

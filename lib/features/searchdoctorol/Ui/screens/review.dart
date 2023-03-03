@@ -11,41 +11,44 @@ import '../../Logic/cubit/doctor_list_cubit.dart';
 import '../widgets/LoadingIndicator.dart';
 import '../widgets/review.dart';
 
-class reviewsList extends StatefulWidget {
+class reviewsList extends StatelessWidget {
   Usermodel doctor;
 
   reviewsList({required this.doctor});
 
-  @override
-  State<reviewsList> createState() => _reviewsListState();
-}
-
-class _reviewsListState extends State<reviewsList> {
   late List<Review> allReviews;
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<DoctorListCubit>(context).testTest();
-  }
 
   @override
   Widget build(BuildContext context) {
+    allReviews =
+        BlocProvider.of<DoctorListCubit>(context).getReviewById(doctor.id);
+
     return Scaffold(
       appBar:
           AppBar(backgroundColor: Colors.deepPurple, title: Text('reviews')),
-      body: buildBlockwidget(),
+      body: buildLoadedListWidgets(),
     );
   }
 
   Widget buildBlockwidget() {
     return BlocBuilder<DoctorListCubit, DoctorListState>(
       builder: (context, state) {
-        if (state is Testt) {
-          return Center(child: Text((state).test));
-        } else {
+        if (state is DoctorReviewLoaded) {
+          allReviews = (state).reviews;
+          return buildLoadedListWidgets();
+        } else if (state is DoctorReviewLoading) {
           return LoadingIndicator();
         }
+        return Center(child: Text('4040'));
       },
     );
+  }
+
+  Widget buildLoadedListWidgets() {
+    return ListView.builder(
+        itemCount: allReviews.length,
+        itemBuilder: (context, index) {
+          return reviewCard(review: allReviews[index]);
+        });
   }
 }
