@@ -101,11 +101,6 @@ class _DoctorListState extends State<DoctorList> {
         if (state is DoctorListLoaded) {
           allDoctors = (state).doctors;
           return buildLoadedListWidgets();
-        }
-        if (state is DoctorListLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
         } else {
           return LoadingIndicator();
         }

@@ -11,38 +11,21 @@ import '../../Logic/cubit/doctor_list_cubit.dart';
 import '../widgets/LoadingIndicator.dart';
 import '../widgets/review.dart';
 
-class reviewsList extends StatelessWidget {
-  late List<Review> allReviews;
+class reviewsList extends StatefulWidget {
   Usermodel doctor;
-  reviewsList({
-    required this.doctor,
-  });
 
-  Widget buildBlockwidget() {
-    return BlocBuilder<DoctorListCubit, DoctorListState>(
-      builder: (context, state) {
-        BlocProvider.of<DoctorListCubit>(context).getReviewById(doctor.id);
-        if (state is DoctorReviewLoaded) {
-          allReviews = (state).reviews;
-          return buildLoadedListWidgets();
-        }
-        if (state is DoctorReviewLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          return Text("error");
-        }
-      },
-    );
-  }
+  reviewsList({required this.doctor});
 
-  Widget buildLoadedListWidgets() {
-    return ListView.builder(
-        itemCount: allReviews.length,
-        itemBuilder: (context, index) {
-          return reviewCard(review: allReviews[index]);
-        });
+  @override
+  State<reviewsList> createState() => _reviewsListState();
+}
+
+class _reviewsListState extends State<reviewsList> {
+  late List<Review> allReviews;
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<DoctorListCubit>(context).testTest();
   }
 
   @override
@@ -51,6 +34,18 @@ class reviewsList extends StatelessWidget {
       appBar:
           AppBar(backgroundColor: Colors.deepPurple, title: Text('reviews')),
       body: buildBlockwidget(),
+    );
+  }
+
+  Widget buildBlockwidget() {
+    return BlocBuilder<DoctorListCubit, DoctorListState>(
+      builder: (context, state) {
+        if (state is Testt) {
+          return Center(child: Text((state).test));
+        } else {
+          return LoadingIndicator();
+        }
+      },
     );
   }
 }

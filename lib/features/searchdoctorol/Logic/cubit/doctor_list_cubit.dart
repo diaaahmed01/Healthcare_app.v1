@@ -24,13 +24,18 @@ class DoctorListCubit extends Cubit<DoctorListState> {
     return allDoctors;
   }
 
-  List<Review> getReviewById(String doctor) {
+  List<Review> getReviewById(String id) {
     emit(DoctorReviewLoading());
-    userRepository.getReviewById(doctor).then((reviews) {
+    userRepository.getReviewById(id).then((reviews) {
       emit(DoctorReviewLoaded(reviews));
       this.allReviews = reviews;
     });
 
     return allReviews;
+  }
+
+  testTest() {
+    String test = 'diaa';
+    emit(Testt(test));
   }
 }

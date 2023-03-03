@@ -9,15 +9,26 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final AppRouter appRouter;
 
   MyApp({Key? key, required this.appRouter}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void dispose() {
+    widget.appRouter.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateRoute: appRouter.onGenerateRoute,
+      onGenerateRoute: widget.appRouter.onGenerateRoute,
       debugShowCheckedModeBanner: false,
     );
   }

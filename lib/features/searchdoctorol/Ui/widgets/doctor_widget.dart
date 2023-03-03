@@ -48,11 +48,12 @@ class doctorWidget extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => doctorInfo(
-                      doctor: doctor,
-                    ),
-                  ));
+                  print("clicked");
+                  Navigator.pushNamed(
+                    context,
+                    '/info',
+                    arguments: doctor,
+                  );
                 },
               )
             ],

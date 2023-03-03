@@ -48,11 +48,11 @@ class doctorInfo extends StatelessWidget {
                     ),
                     MaterialButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => reviewsList(
-                            doctor: doctor,
-                          ),
-                        ));
+                        Navigator.pushNamed(
+                          context,
+                          '/reviews',
+                          arguments: doctor,
+                        );
                       },
                       child: Text("reviews"),
                     )
