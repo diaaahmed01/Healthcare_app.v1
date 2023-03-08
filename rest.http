@@ -1,0 +1,20 @@
+#get all doctors
+GET https://test-third-baseline.onrender.com/Doctors
+
+###get  doctor reviews by id
+GET https://test-third-baseline.onrender.com/Reviews/63f00000760946737c1b3856
+
+###
+GET https://test-third-baseline.onrender.com/DoctorExperience
+
+
+###
+PATCH https://test-third-baseline.onrender.com/DoctorExperience/63fb0582837c4d054197ee2e
+Content-Type: application/json
+
+{
+
+    "degrees":["1799"]
+}
+###
+GET  https://test-third-baseline.onrender.com/Patients

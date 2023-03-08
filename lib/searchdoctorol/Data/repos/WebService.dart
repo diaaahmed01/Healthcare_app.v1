@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:drlist_bloc_app/searchdoctorol/Data/models/appointment.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -7,22 +8,23 @@ import '../../../../Configuration/api_constants.dart';
 
 class WebService {
   String endpoint = ApiConstants.baseUrl;
-  String api = ApiConstants.api;
-  String ReviewApi = ApiConstants.ReviewApi;
+  String AppointmentApi = ApiConstants.Appointments;
 
-  Future<List> getReviewById(String doctorId) async {
-    Uri url1 = Uri.https(endpoint, ReviewApi);
-    Uri url = Uri.parse("$url1/$doctorId");
-    print(url);
-    Response response = await get(url);
-    if (response.statusCode == 200) {
-      final List result = jsonDecode(response.body);
-      print(result);
-      return result;
-    } else {
-      throw Exception(response.reasonPhrase);
-    }
-  }
+  static String patientsApi = '/Patients';
+
+  // Future<List> getPatient(String doctorId) async {
+  //   Uri url1 = Uri.https(endpoint, patientsApi);
+  //   Uri url = Uri.parse("$url1/$doctorId");
+  //   print(url);
+  //   Response response = await get(url);
+  //   if (response.statusCode == 200) {
+  //     final List result = jsonDecode(response.body);
+  //     print(result);
+  //     return result;
+  //   } else {
+  //     throw Exception(response.reasonPhrase);
+  //   }
+  // }
 
   Map<String, String> get headers {
     return {
@@ -30,13 +32,13 @@ class WebService {
     };
   }
 
-  Future<List> getUser() async {
-    var url = Uri.https(endpoint, api);
-    print(url);
+  Future<List> getPatients() async {
+    var url = Uri.https(endpoint, patientsApi);
+
     Response response = await get(url);
     if (response.statusCode == 200) {
       final List result = jsonDecode(response.body);
-      print(result);
+
       return result;
     } else {
       throw Exception(response.reasonPhrase);
@@ -83,5 +85,19 @@ class WebService {
     }
 
     return status;
+  }
+
+  Future<List> getAppointments(String doctorId) async {
+    var url1 = Uri.https(endpoint, AppointmentApi);
+    Uri url = Uri.parse("$url1/$doctorId");
+    print(url);
+    Response response = await get(url);
+    if (response.statusCode == 200) {
+      final List result = jsonDecode(response.body);
+
+      return result;
+    } else {
+      throw Exception(response.reasonPhrase);
+    }
   }
 }

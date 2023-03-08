@@ -1,22 +1,19 @@
-import '../../Data/models/model.dart';
-
-import '../../Logic/cubit/doctor_list_cubit.dart';
-import '../widgets/doctor_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../Data/models/patient.dart';
+import '../../Logic/cubit/Appointments_cubit.dart';
 import '../widgets/LoadingIndicator.dart';
+import '../widgets/appointmentCard.dart';
 
-class DoctorList extends StatefulWidget {
+class AppointmentsList extends StatefulWidget {
   @override
-  State<DoctorList> createState() => _DoctorListState();
+  State<AppointmentsList> createState() => _AppointmentsListState();
 }
 
-class _DoctorListState extends State<DoctorList> {
-  late List<Usermodel> allDoctors;
-  late List<Usermodel> searchedForDoctor;
+class _AppointmentsListState extends State<AppointmentsList> {
+  late List<Patient> allPatients;
+  late List<Patient> searchedForPatient;
   bool _searching = false;
   final _searchTextController = TextEditingController();
 
@@ -36,8 +33,9 @@ class _DoctorListState extends State<DoctorList> {
   }
 
   void addSearchedForDoctorToSearchedList(String searchedDoctor) {
-    searchedForDoctor = allDoctors
-        .where((Doctor) => Doctor.name.toLowerCase().startsWith(searchedDoctor))
+    searchedForPatient = allPatients
+        .where((Doctor) =>
+            Doctor.patientName!.toLowerCase().startsWith(searchedDoctor))
         .toList();
 
     setState(() {});
@@ -92,38 +90,46 @@ class _DoctorListState extends State<DoctorList> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<DoctorListCubit>(context).getAllDoctors();
+    BlocProvider.of<AppointmentsCubit>(context).getAllPatients();
   }
 
   Widget buildBlockwidget() {
-    return BlocBuilder<DoctorListCubit, DoctorListState>(
-      builder: (context, state) {
-        if (state is DoctorListLoaded) {
-          allDoctors = (state).doctors;
-          return buildLoadedListWidgets();
-        } else {
-          return LoadingIndicator();
-        }
-      },
-    );
+    return BlocConsumer<AppointmentsCubit, AppointmentsState>(
+        listener: (context, state) {
+      final Statebar = SnackBar(
+        duration: Duration(milliseconds: 700),
+        content: Text("${state}"),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(Statebar);
+    }, builder: (context, state) {
+      if (state is AppointmentsListLoaded) {
+        allPatients = (state).patients;
+        return buildLoadedListWidgets();
+      }
+      if (state is AppointmentsListLoading) {
+        return LoadingIndicator();
+      } else {
+        return Text("error loading data");
+      }
+    });
   }
 
   Widget buildLoadedListWidgets() {
     return ListView.builder(
         itemCount: _searchTextController.text.isEmpty
-            ? allDoctors.length
-            : searchedForDoctor.length,
+            ? allPatients.length
+            : searchedForPatient.length,
         itemBuilder: (context, index) {
-          return doctorWidget(
-            doctor: _searchTextController.text.isEmpty
-                ? allDoctors[index]
-                : searchedForDoctor[index],
+          return appointmenCart(
+            patient: _searchTextController.text.isEmpty
+                ? allPatients[index]
+                : searchedForPatient[index],
           );
         });
   }
 
   Widget _buildAppBarTitle() {
-    return Text('DR List');
+    return Text('My Appointments');
   }
 
   @override

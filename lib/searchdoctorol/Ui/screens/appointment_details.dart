@@ -1,24 +1,21 @@
-import 'package:drlist_bloc_app/Configuration/api_constants.dart';
-import 'package:drlist_bloc_app/features/searchdoctorol/Data/models/review.dart';
-import 'package:drlist_bloc_app/features/searchdoctorol/Ui/screens/review.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../Data/models/model.dart';
+import '../../Data/models/patient.dart';
 
-class doctorInfo extends StatelessWidget {
-  final Usermodel doctor;
+class AppointmentInfo extends StatelessWidget {
+  const AppointmentInfo({
+    required this.patient,
+  });
 
-  const doctorInfo({required this.doctor});
+  final Patient patient;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text('DR profile'),
+        title: Text('My Appointments'),
       ),
       body: Container(
         color: Colors.blueGrey,
@@ -39,21 +36,15 @@ class doctorInfo extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      doctor.name,
+                      '${patient.patientName}',
                       style: TextStyle(color: Colors.black, fontSize: 30),
                     ),
                     Text(
-                      doctor.specialty,
+                      '${patient.patientAge}',
                       style: TextStyle(color: Colors.black, fontSize: 25),
                     ),
                     MaterialButton(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          '/reviews',
-                          arguments: doctor,
-                        );
-                      },
+                      onPressed: () {},
                       child: Text("reviews"),
                     )
                   ],
